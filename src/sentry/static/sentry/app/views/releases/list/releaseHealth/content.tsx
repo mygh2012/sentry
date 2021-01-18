@@ -257,7 +257,7 @@ const CollapseButtonWrapper = styled('div')`
 `;
 
 const ProjectRow = styled(PanelItem)`
-  padding: 8px ${space(2)};
+  padding: ${space(1)} ${space(2)};
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
     font-size: ${p => p.theme.fontSizeMedium};
   }
