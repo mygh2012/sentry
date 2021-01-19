@@ -306,7 +306,7 @@ const AdoptionWrapper = styled('span')`
 `;
 
 const SessionsColumn = styled(Column)`
-  justify-content: center;
+  text-align: center;
 `;
 
 const DailyColumn = styled(Column)`
