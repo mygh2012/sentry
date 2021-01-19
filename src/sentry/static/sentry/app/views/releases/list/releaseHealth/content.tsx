@@ -268,7 +268,7 @@ const Layout = styled('div')`
   display: grid;
   grid-template-columns: 1fr 1fr 0.5fr;
   grid-column-gap: ${space(1)};
-  align-content: center;
+  align-items: center;
   width: 100%;
 
   @media (min-width: ${p => p.theme.breakpoints[0]}) {
@@ -276,7 +276,7 @@ const Layout = styled('div')`
   }
 
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    grid-template-columns: 1fr 0.8fr 1fr 0.5fr 0.5fr 0.5fr;
+    grid-template-columns: 1fr 0.8fr 1fr 0.5fr 0.5fr 0.6fr;
   }
 
   @media (min-width: ${p => p.theme.breakpoints[3]}) {
