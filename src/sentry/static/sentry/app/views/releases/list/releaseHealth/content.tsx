@@ -73,8 +73,9 @@ const Content = ({
               </DailyColumn>
             </React.Fragment>
           )}
-          <RightColumn>{t('Crashes')}</RightColumn>
-          <RightColumn>{t('New Issues')}</RightColumn>
+          <CrashIssueColumn>{t('Crashes')}</CrashIssueColumn>
+          <CrashIssueColumn>{t('New Issues')}</CrashIssueColumn>
+          <ViewColumn />
         </Layout>
       </Header>
 
@@ -185,7 +186,7 @@ const Content = ({
                     )}
                   </DailyColumn>
 
-                  <RightColumn>
+                  <CrashIssueColumn>
                     {showPlaceholders ? (
                       <StyledPlaceholder width="30px" />
                     ) : hasHealthData && defined(sessionsCrashed) ? (
@@ -193,9 +194,9 @@ const Content = ({
                     ) : (
                       <NotAvailable />
                     )}
-                  </RightColumn>
+                  </CrashIssueColumn>
 
-                  <RightColumn>
+                  <CrashIssueColumn>
                     <Tooltip title={t('Open in Issues')}>
                       <Link
                         to={getReleaseNewIssuesUrl(orgSlug, project.id, releaseVersion)}
@@ -203,15 +204,15 @@ const Content = ({
                         <Count value={newGroups || 0} />
                       </Link>
                     </Tooltip>
-                  </RightColumn>
+                  </CrashIssueColumn>
 
-                  <RightColumn>
+                  <ViewColumn>
                     <ProjectLink
                       orgSlug={orgSlug}
                       project={project}
                       releaseVersion={releaseVersion}
                     />
-                  </RightColumn>
+                  </ViewColumn>
                 </Layout>
               </ProjectRow>
             );
@@ -265,13 +266,13 @@ const ProjectRow = styled(PanelItem)`
 
 const Layout = styled('div')`
   display: grid;
-  grid-template-columns: 1fr 1fr 0.5fr 0.5fr 0.5fr;
+  grid-template-columns: 1fr 1fr 0.5fr;
   grid-column-gap: ${space(1)};
   align-content: center;
   width: 100%;
 
   @media (min-width: ${p => p.theme.breakpoints[0]}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr 0.5fr 0.5fr;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr 0.5fr 0.5fr;
   }
 
   @media (min-width: ${p => p.theme.breakpoints[1]}) {
@@ -286,8 +287,6 @@ const Layout = styled('div')`
 const Column = styled('div')`
   ${overflowEllipsis};
   line-height: 20px;
-  display: flex;
-  align-items: center;
 `;
 
 const AdoptionColumn = styled(Column)`
@@ -312,16 +311,6 @@ const SessionsColumn = styled(Column)`
 
 const DailyColumn = styled(Column)`
   display: none;
-  @media (min-width: ${p => p.theme.breakpoints[0]}) {
-    display: flex;
-    /* Chart tooltips need overflow */
-    overflow: visible;
-  }
-
-  @media (min-width: ${p => p.theme.breakpoints[1]}) {
-    display: none;
-    overflow: hidden;
-  }
 
   @media (min-width: ${p => p.theme.breakpoints[3]}) {
     display: flex;
@@ -330,8 +319,17 @@ const DailyColumn = styled(Column)`
   }
 `;
 
-const RightColumn = styled(Column)`
-  justify-content: flex-end;
+const CrashIssueColumn = styled(Column)`
+  display: none;
+
+  @media (min-width: ${p => p.theme.breakpoints[0]}) {
+    display: block;
+    text-align: right;
+  }
+`;
+
+const ViewColumn = styled(Column)`
+  text-align: right;
 `;
 
 const ChartWrapper = styled('div')`
